@@ -1,0 +1,182 @@
+@charset "utf-8";  /*모바일 용으로 재작성함*/
+
+* {
+		margin:0; padding:0; box-sizing:border-box;
+}
+html {scroll-behavior:smooth;}
+
+/*구글웹폰트 연결*/
+html,body {
+		font:13pt/160% 'Single Day', cursive; /*필기체*/
+}
+img  {
+		display:block; max-width:100%;
+}
+
+#layout {
+		width:450px; margin:auto;
+		/*border: 2px solid purple; 위치와 크기 확인을 위해 작성*/		
+		position: relative; /*아주 중요! <nav>태그와 관련됨*/
+}
+
+/*상단*/
+header {
+		background:darkmagenta; color:white;
+		padding:20px;  height:100px;
+}
+header h1 {
+		text-align:center;
+		/*위에서 슬라이드다운 될 예정*/
+		display:none;
+}
+header rt {
+		font-weight:normal;
+		font-size:0.9rem;
+		transform:translateY(-5px);
+}
+header button { /*상단 오른쪽 햄버거 아이콘*/
+		float: right; /*display: flex;를 사용하지 않고 버튼 조절=>float로 오른쪽에 배치(가운데로는 배치 못함)-->오른쪽으로 가는 기준은 부모로 정해짐*/
+		font-size: 1.5rem; font-weight: bold;
+		padding: 5px 10px; color: white;
+		background: none; border: none;
+}
+
+/*내비게이션 메뉴*/
+nav  {
+		/*display:block; flex가 nav에 있으면 안되고 새로 만든 div에 있어야 함
+		justify-content:space-around;
+		border-bottom:1px solid #ccc; <div>를 생성하면서 필요없어짐*/
+		position: absolute;  /*absolute를 하게 되면 width:100%; 기능이 상실되어 크기가 작아짐*/
+		/*border: 2px solid blue;  위치와 크기를 확인하기 위해 작성한 것*/
+		width: 100%;	/*100%로 하면 기준이 부모를 따라가고, nav의 부모는 layout이지만 position:absolute;를 작성하여 부모에 position이 없어서 브라우저를 부모로 인식하여 설정한 테두리 밖으로 벗어남*/
+		height: 80vh;	/*height는 100%가 적용되지 않음*/
+		background: rgba(255,255,255, 0.9); /*투명도를 0.8보다 작게 하면 구글 가이드에 의하면 가독성이 떨어진다고 함*/
+		z-index: 1; /*z-index는 포토샵에서 layer와 비슷함*/
+		box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5); /*box-shadow: x방향 y방향 퍼짐정도 색깔;*/
+		display: none;  /*메뉴 안보였다가 햄버거버튼 누르면 보이게 하기 위해 none;으로 설정함*/
+}
+nav div {
+		display: flex;
+		flex-direction: column; /*진열방향이 가로방향에서 세로방향으로 변경됨*/
+}
+nav a {
+		text-decoration:none; color:black;
+		padding:20px 30px; font-weight: bold; 
+		/*border-bottom:3px solid transparent;*/
+		border-bottom: 1px solid gray;
+}
+nav a::before	{
+		content: "\2618"; color: purple;
+		font-size: 1.2rem;
+		padding-right: 10px;
+		transform: translateY(2px);
+		display: inline-block;
+}
+/* a:hover, nav a:active {
+		font-weight:bold; transform:scale(1.1);
+		border-bottom:3px solid black;
+} hover는 모바일에서는 안 쓸 예정이라 지움*/
+
+/*메인*/
+main 	{
+		padding:20px 10px 30px 10px;
+		/*overflow:hidden;*/
+		position:relative;
+}
+#f1  {
+		position:absolute;/*width:100% 상실됨*/
+		border:2px solid red;
+		width:50%;
+}
+#f1 + p {
+		margin-top:30px;
+}
+p 		{
+		text-align:justify;
+		padding-top:10px; padding-bottom:15px;
+		line-height:180%;
+}
+p img 	{
+		width:70px; float:left;
+		margin:7px 15px 0 0;
+		transition:0.5s;
+		
+}
+p img:hover {
+		transform:rotate(-20deg);
+}
+
+/*이미지 슬라이드*/
+figure	{
+		border-top: 10px solid tomato;
+		overflow: hidden;
+}
+figure div { /*애니메이션 되는 곳*/
+	 	width: 1290px;  /* 1290 = 430*3 */
+		display: flex;
+		position: relative; /*좌표이동 애니메이션에 필요*/
+}
+figure img {
+		border-radius:10px; width: 430px;
+		box-shadow:0 0  5px rgba(0,0,0,0.5);
+}
+figcaption {
+		font-size:0.9rem; text-align:center;
+		color:gray;
+}
+
+/*관련정보*/
+section {
+		background:pink; padding:10px;
+}
+section:hover {	
+		background:yellowgreen;
+}
+section:hover h3 {
+		padding-left:50px;
+}
+
+h3::before {
+		content:"\2665"; color:darkmagenta;
+		margin-right:10px;
+		transform:translateY(2px);
+		display:inline-block;
+}
+h3 		{
+		margin-top:10px;
+		transition:0.5s;
+}
+
+/*하단*/
+footer {
+		background:#ccc; padding:10px;
+		font-size:0.85rem; text-align:center;
+		color:#444;
+}
+
+/* TOP 아이콘 */
+#up  {
+	background:rgba(255,255,255, 0.8); color:black;
+	text-decoration:none;
+	box-shadow:0 0  5px black;
+	padding:3px 10px; border-radius:5px;
+	position:fixed; bottom:10px; 
+	right:calc(((100% - 450px) / 2) + 5px);
+}
+
+/*휴대폰*/
+@media(max-width:450px){
+	#up {right:5px;}
+}
+
+
+
+
+
+
+
+
+
+
+
+
